@@ -2,7 +2,28 @@
 
 All notable changes to the Verkflöde Agent Operating Model (VAOM) are documented in this file.
 
-## [3.5] - 2026
+## [4.0] - 2026-07
+
+The enforcement release: **delegation boundaries that compile.** VAOM 4.0 extends the framework from declared boundaries to enforced boundaries: every entry in the Delegation Authority Matrix must be technically bound to agent identity, credentials, and tool permissions.
+
+### Added
+- **Seventh design principle: Boundaries Compile to Enforcement** — policy that cannot be compiled into scopes, credentials, and runtime enforcement is documentation, not control.
+- **Section 9: Delegation Identity & Credentialing** — the delegated execution context (accountable role × agent identity × task × scopes × band × expiry, evaluated at every tool call); compiling matrix rows into scopes and tool manifests; structural non-delegability (tool absence as the strongest boundary); the agent identity lifecycle (registration, credentialing, derivation, rotation/revocation, retirement) and agent registry cross-referenced with the model registry.
+- **Dynamic Delegation & Authority Attenuation** (Section 5.3, Pattern 6) — three inheritance rules for runtime-spawned sub-agents: the attenuation rule (child authority is a strict subset, enforced via credential derivation), spawn-as-decision (spawning has its own matrix row), and chain accountability (named human owns the whole chain; depth/fan-out limits).
+- **Fourth multi-agent failure mode: Delegation Laundering** — decisions escaping constraints by routing through looser-bounded agents; defense: authority attaches to decision types, not agents.
+- **Section 10: Continuous Assurance and the Guardian Function** — third cross-cutting concern (alongside Governance and Human Oversight): enforcement telemetry, behavioral envelopes, chain integrity monitoring, circuit breakers; the guardian-agent pattern with recursive governance (guardians contain but never expand, do not guard themselves, and have accountable humans).
+- **Section 11: The Delegation Scorecard** — ten metrics with healthy ranges across calibration health (band distribution, Band B approval rate, exception share, dimension correlation, verifier disagreement), operational health (band drift, escalation SLA, Band A audit error), and enforcement health (scope-denial rate, chain integrity incidents).
+- **Fifth confidence dimension: Independent Verification** — verifier distinct from the proposer (different-family model, deterministic checker, or dry-run); verifier-independence requirement; new implementation challenge: verification theater (track verifier disagreement rates).
+- **Worked example 7D: Autonomous Incident Remediation** — IT operations agent with dynamically spawned sub-agents; demonstrates delegated execution contexts, credential attenuation, chain-level confidence, structural non-delegability, and circuit breakers end to end.
+
+### Changed
+- **Regulatory alignment rewritten for 2026–2028** (Section 13): post-Digital-Omnibus EU AI Act timeline (Annex III high-risk → 2 December 2027; Annex I → 2 August 2028; Article 50(2) marking → 2 December 2026; GPAI obligations in force since August 2025), framed as a design window, not relief. Added alignment mappings: Singapore IMDA Model AI Governance Framework for Agentic AI, OWASP Top 10 for Agentic Applications, NIST AI Agent Standards Initiative / SP 800-53 agent overlays (forward-compatibility), and levels-of-autonomy research (autonomy certificates ↔ signed matrix entries).
+- **Section 2** — added "VAOM Among the 2026 Agentic Frameworks": VAOM positioned as the design method that produces the delegation artifact security, identity, and standards frameworks presuppose.
+- **Section 1** — added market validation (Gartner agentic project cancellation forecast; Forrester governance-gap survey).
+- **Implementation roadmap** — Phase 3 now includes identity compilation (agent registry, scope compilation, execution context design); Phase 4 wires circuit breakers and credential revocation; Phase 5 establishes the scorecard baseline and includes a structural-denial enforcement test.
+- Tagline extended: *Autonomy, bounded. Decisions, traceable. Accountability, preserved. Boundaries, enforced.*
+
+## [3.5] - 2026-04
 
 ### Added
 - **Section 2: What VAOM Is (and What It Is Not)** — clarifies VAOM as a decision governance framework, not an organisational design model. Includes credit risk decisioning analogy for financial services audiences.
@@ -17,7 +38,7 @@ All notable changes to the Verkflöde Agent Operating Model (VAOM) are documente
   - 7C: HR Policy Violation Assessment — predominantly non-delegable; value through boundary clarity
 - **Comparative mapping** (separate document) — VAOM v3.5 mapped against NIST AI RMF and ISO/IEC 42001 with example-grounded deep dives.
 
-## [3.0] - 2026
+## [3.0] - 2026-04
 
 ### Added
 - **Section 4: Delegation Discovery & Design** — four-stage method: Decision Inventory, Authority Decomposition, Delegation Pattern Selection, Delegation Readiness Assessment.

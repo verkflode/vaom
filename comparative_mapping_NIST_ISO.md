@@ -1,6 +1,8 @@
-# Comparative Mapping: VAOM v3.5 vs NIST AI RMF vs ISO/IEC 42001
+# Comparative Mapping: VAOM v4.0 vs NIST AI RMF vs ISO/IEC 42001
 
-**Purpose.** This document provides a direct, implementation-level comparison between **VAOM v3.5** (Verkflöde Agent Operating Model), the **NIST AI Risk Management Framework (AI RMF 1.0)**, and **ISO/IEC 42001**. The mapping is grounded in concrete VAOM worked examples (Customer Complaints, AML Transaction Triage, HR Policy Assessment) and is intended for enterprise architects, risk leaders, auditors, and regulators.
+**Purpose.** This document provides a direct, implementation-level comparison between **VAOM v4.0** (Verkflöde Agent Operating Model), the **NIST AI Risk Management Framework (AI RMF 1.0)**, and **ISO/IEC 42001**. The mapping is grounded in concrete VAOM worked examples (Customer Complaints, AML Transaction Triage, HR Policy Assessment) and is intended for enterprise architects, risk leaders, auditors, and regulators.
+
+> **v4.0 update (July 2026).** VAOM 4.0 adds Delegation Identity & Credentialing (Section 9), Continuous Assurance and the guardian function (Section 10), and the Delegation Scorecard (Section 11). These strengthen the mappings below: identity-bound delegated execution contexts provide MEASURE/MANAGE evidence at tool-call granularity, and the scorecard operationalizes ISO 42001 continual improvement. Section 5 of this document adds mappings to the frameworks published since early 2026. A control-by-control mapping to NIST's SP 800-53 agent overlays (COSAiS) will be added when the overlays reach final form.
 
 ## 1. Role Separation and Complementarity
 
@@ -8,7 +10,7 @@
 |---|---|---|
 | NIST AI RMF | Have AI risks been identified, measured, and managed? | Risk taxonomy, controls guidance, lifecycle activities |
 | ISO/IEC 42001 | Is there a management system governing AI consistently and improving over time? | Policies, roles, processes, audit & continual improvement |
-| VAOM v3.5 | Who is allowed to decide what, under which conditions, with what confidence, and under whose authority — right now? | Executable delegation boundaries, confidence gates, escalation logic, audit evidence |
+| VAOM v4.0 | Who is allowed to decide what, under which conditions, with what confidence, and under whose authority — right now? | Executable delegation boundaries, confidence gates, escalation logic, audit evidence |
 
 **Key takeaway:** NIST and ISO define *what must exist*; VAOM defines *how decisions operate* inside live workflows.
 
@@ -16,7 +18,7 @@
 
 ### 2.1 Function-Level Alignment
 
-| NIST AI RMF Function | What the RMF Requires | VAOM v3.5 Implementation | Example Illustration |
+| NIST AI RMF Function | What the RMF Requires | VAOM v4.0 Implementation | Example Illustration |
 |---|---|---|---|
 | GOVERN | Policies, roles, accountability, oversight | Layer 6 (Governance & Control); Readiness Condition 5 (Named accountable human) | HR policy violations: senior HR role explicitly accountable for outcomes; automation restricted |
 | MAP | Context, stakeholders, impact identification | Delegation Discovery & Design (Decision Inventory + Authority Decomposition) | Customer complaints: classification, response drafting, and regulatory reporting mapped as distinct decisions |
@@ -29,7 +31,7 @@
 
 ### 3.1 Management-System Alignment
 
-| ISO/IEC 42001 Theme | ISO Requirement (Simplified) | VAOM v3.5 Mechanism | Example Illustration |
+| ISO/IEC 42001 Theme | ISO Requirement (Simplified) | VAOM v4.0 Mechanism | Example Illustration |
 |---|---|---|---|
 | Leadership & Accountability | Clear ownership of AI outcomes | Readiness Condition 5; override/suspension authority | HR workflow: named HR decision-maker with override power |
 | Operational Controls | Defined, repeatable AI controls | Seven-layer operating structure | AML monitoring with bounded automated dismissal |
@@ -79,7 +81,35 @@
 
 **VAOM advantage:** Designed refusal to automate, with technically enforced boundaries and audit justification.
 
-## 5. Calibration as a Governance Control (Cross-Framework)
+## 5. Mappings to the 2026 Agentic Frameworks (v4.0)
+
+The agentic governance frameworks published since early 2026 assess, secure, or standardize agent systems; VAOM produces the delegation artifact they presuppose.
+
+### 5.1 Singapore IMDA Model AI Governance Framework for Agentic AI (January 2026)
+
+| IMDA dimension | VAOM v4.0 mechanism |
+|---|---|
+| Assess and bound risks upfront | Delegation Discovery & Design; Authority Decomposition |
+| Make humans meaningfully accountable | Readiness Condition 5 (named accountable role); Layer 7; chain accountability for sub-agents |
+| Technical controls and processes | Confidence Gate; delegated execution contexts and scope compilation (Section 9); Continuous Assurance (Section 10) |
+| Tiered autonomy (fully automated / human-approved / off-limits) | Bands A / B / non-delegable, at decision-point rather than system granularity, with confidence as an independent gate |
+
+### 5.2 OWASP Top 10 for Agentic Applications (2026)
+
+OWASP catalogs agentic threats; VAOM structures function as controls. Illustrative pairings:
+
+- **Agent identity & privilege abuse** → delegated execution contexts; short-lived scoped credentials; no standing or shared agent credentials (Section 9)
+- **Excessive autonomy / unauthorized actions** → Delegation Authority Matrix band ceilings; structural non-delegability (tool absence)
+- **Multi-agent exploitation** → attenuation rule enforced via credential derivation; chain depth/fan-out limits; delegation-laundering defense (authority attaches to decision types, not agents)
+- **Runtime compromise (e.g., injection steering an agent toward its boundary)** → scope-denial telemetry and behavioral envelopes with circuit breakers (Section 10)
+
+Security teams should treat the OWASP taxonomy as an adversarial test suite for a VAOM implementation.
+
+### 5.3 NIST AI Agent Standards Pipeline
+
+NIST's AI Agent Standards Initiative and the SP 800-53 control overlays for AI systems (including single-agent and multi-agent overlays) were in draft at time of writing. VAOM artifacts (matrix entries, execution contexts, decision traces, spawn logs, the Delegation Scorecard) are designed to serve as workflow-level evidence for system-level controls. A control-by-control mapping will be added when the overlays are final.
+
+## 6. Calibration as a Governance Control (Cross-Framework)
 
 VAOM's **Calibration Anti-Patterns** operationalize what both NIST AI RMF and ISO/IEC 42001 require but do not specify:
 
@@ -91,14 +121,14 @@ VAOM's **Calibration Anti-Patterns** operationalize what both NIST AI RMF and IS
 
 Each anti-pattern provides **observable signals** that trigger corrective action under ISO-style management review and RMF-style risk management.
 
-## 6. Safe Positioning Statement
+## 7. Safe Positioning Statement
 
-VAOM v3.5 operationalizes NIST AI RMF risk controls and ISO/IEC 42001 management requirements at the level where AI decisions actually occur: inside live enterprise workflows.
+VAOM v4.0 operationalizes NIST AI RMF risk controls and ISO/IEC 42001 management requirements at the level where AI decisions actually occur, inside live enterprise workflows, and binds them to enforcement through agent identity and scoped credentials.
 
-## 7. Summary
+## 8. Summary
 
 - **NIST AI RMF** provides the risk language and expectations.
 - **ISO/IEC 42001** provides the governance system and assurance model.
-- **VAOM v3.5** provides the missing execution layer: explicit delegation, confidence gating, escalation, and evidence.
+- **VAOM v4.0** provides the missing execution layer: explicit delegation, confidence gating, escalation, identity-bound enforcement, runtime assurance, and evidence.
 
 Together, they form a complete stack for responsible, auditable AI delegation.
